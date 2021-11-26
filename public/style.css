@@ -1,0 +1,37 @@
+.main-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.msg-wrapper {
+  flex: 1;
+  margin: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  /* ::-webkit-scrollbar {
+      display: none;
+    }; */
+}
+#status-msg {
+  text-align: center;
+  font-weight: 600;
+}
+.chat-footer {
+  display: flex;
+}
+.chat-action-btn {
+  height: 40px;
+}
+
+.msg-input {
+  flex: 1;
+}
+.send-btn {
+  height: 40px;
+}
