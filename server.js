@@ -100,7 +100,12 @@ io.on("connection", (socket) => {
     socket.emit("wait", { message: "Connecting to stranger" });
     checkLoner(socket);
   });
-
+  socket.on("stopped-connecting", () => {
+    console.log("Before", Q);
+    let index = Q.findIndex((item) => item.id == socket.id);
+    Q.splice(index, 1);
+    console.log("After", Q);
+  });
   socket.on("send-message", (data) => {
     console.log("sending", data.roomId);
     data.type = "incoming";
@@ -137,16 +142,17 @@ io.on("connection", (socket) => {
     socket.broadcast.to(clientRoom).emit("stranger-disconnected", {
       message: "Stranger disconnected.Click New chat to find new stranger",
     });
-
+    console.log("chat-stopped-by-user", room);
     // stopChat();
     // onChatStop();
 
-    socket.broadcast.emit("user-count", { length: onlineUsers.length });
+    // socket.broadcast.emit("user-count", { length: onlineUsers.length });
   });
 
   socket.on("disconnect", () => {
     removeUser(socket);
     // onChatStop();
+    console.log("disconnect", Q);
     let clientRoom = room[socket.id];
     socket.broadcast.to(clientRoom).emit("stranger-disconnected", {
       message: "Stranger disconnected.Click New chat to find new stranger",
