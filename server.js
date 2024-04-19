@@ -118,6 +118,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("not-typing", (data) => {
+    console.log("Not typing hitted");
     socket.to(data.roomId).emit("stranger-not-typing");
   });
 
